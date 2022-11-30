@@ -4,16 +4,19 @@
 
 int main(){
 	Arvore *a = NULL;
-	inserir(&a, 3);
-	inserir(&a, 2);
-	inserir(&a, 1);
-	inserir(&a, 4);
-	inserir(&a, 5);
-	inserir(&a, 6);
-	inserir(&a, 7);
-	inserir(&a, 16);
-	inserir(&a, 15);
-	inserir(&a, 17);
+	//5, 12, 9, 11, 13, 10 e 6
+	a = inserir(a, 5);
+	a = inserir(a, 12);
+	a = inserir(a, 9);
+	a = inserir(a, 11);
+	a = inserir(a, 13);
+	a = inserir(a, 10);
+	a = inserir(a, 6);
+	printf("\nImprimindo árvore em pré-ordem\n");
+	preordem(a);
+	printf("\nExclusão do 12\n");
+	remover(a, 12);
+	printf("\nImprimindo árvore em pré-ordem\n");
 	preordem(a);
 	return 0;
 }
