@@ -18,5 +18,7 @@ int main(){
 	remover(a, 12);
 	printf("\nImprimindo árvore em pré-ordem\n");
 	preordem(a);
+	free(a);
+	a=NULL; //manter a segurança do endereço desalocado
 	return 0;
 }

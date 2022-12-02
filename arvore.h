@@ -45,34 +45,45 @@ Arvore* menor_subarvore_direita(Arvore* a){
 	return temp;
 }
 void remover(Arvore *a, int info){
-	if(a->info == info){
-		if(a->esq==NULL && a->dir==NULL){//nó folha
-			free(a);
-		}else if(a->esq==NULL && a->dir!=NULL ){ //segundo caso
-			Arvore* temp = a;
-			a=a->dir;
-			free(temp);
-		}else if(a->dir==NULL && a->esq!=NULL){ //segundo caso
-			Arvore* temp = a;
-			a=a->esq;
-			free(temp);
+	if(a!=NULL){
+		if(a->info == info){
+			if(a->esq==NULL && a->dir==NULL){//nó folha
+			printf("Elemento removido -> %d",a->info);
+				free(a);
+				a=NULL;
+			}else if(a->esq==NULL && a->dir!=NULL ){ //segundo caso
+				Arvore* temp = a;
+				a=a->dir;
+				free(temp);
+				a->dir = NULL;
+			}else if(a->dir==NULL && a->esq!=NULL){ //segundo caso
+				Arvore* temp = a;
+				a=a->esq;
+				free(temp);
+				a->esq=NULL;
+			}else{//terceiro caso
+				Arvore *temp;
+				temp = menor_subarvore_direita(a);
+				a->info = temp->info;
+				temp->info = info;
+				remover(a->dir,info);
+			}
+		}else if(info > a->info){
+			remover(a->dir, info);
 		}else{
-			Arvore *temp;
-			temp = menor_subarvore_direita(a);
-			a->info = temp->info;
-			temp->info = info;
-			remover(a->dir,info);
+			remover(a->esq, info);
 		}
-	}else if(info > a->info){
-		remover(a->dir, info);
-	}else{
-		remover(a->esq, info);
 	}
 }
 
+Arvore* remover_2(Arvore* a, int info){
+	if(a==NULL){
+		printf("Nó inexistente!!\n");
+	}
+}
 //Percorre a árvore em pré-ordem
 void preordem(Arvore *a){
-	if(a != NULL){
+	if(a){
 		printf("%d(",a->info);
 		preordem(a->esq);
 		preordem(a->dir);
